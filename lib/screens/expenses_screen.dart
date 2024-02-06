@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:expense_tracker/widgets/expenses.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/expenses.dart';
 
 class ExpensesScreen extends StatelessWidget {
   ExpensesScreen({super.key});
@@ -21,25 +21,31 @@ class ExpensesScreen extends StatelessWidget {
     ),
   ];
 
+  void openAddExpenseOverlay(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const Text("Modal Bottom Sheet"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Expense Tracker",
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.add),
-            )
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Expense Tracker",
         ),
-        body: Expenses(
-          expenses: _registeredExpenses,
-        ),
+        actions: [
+          IconButton(
+            onPressed: () => openAddExpenseOverlay(
+              context,
+            ),
+            icon: const Icon(Icons.add),
+          )
+        ],
+      ),
+      body: Expenses(
+        expenses: _registeredExpenses,
       ),
     );
   }
