@@ -21,14 +21,22 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(
+      child: Text('No expenses found. Start adding some!'),
+    );
+
+    if (widget.expenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: widget.expenses,
+        onRemoveExpense: widget.onRemoveExpense,
+      );
+    }
+
     return Column(
       children: [
-        const Text("Chart"),
+        const Text('Chart'),
         Expanded(
-          child: ExpensesList(
-            expenses: widget.expenses,
-            onRemoveExpense: widget.onRemoveExpense,
-          ),
+          child: mainContent,
         ),
       ],
     );
