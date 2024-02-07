@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/expenses.dart';
 
-class ExpensesScreen extends StatelessWidget {
-  ExpensesScreen({super.key});
+class ExpensesScreen extends StatefulWidget {
+  const ExpensesScreen({super.key});
 
+  @override
+  State<ExpensesScreen> createState() => _ExpensesScreenState();
+}
+
+class _ExpensesScreenState extends State<ExpensesScreen> {
   final List<Expense> _registeredExpenses = [
     Expense(
       title: "NU",
@@ -22,10 +27,16 @@ class ExpensesScreen extends StatelessWidget {
     ),
   ];
 
-  void openAddExpenseOverlay(BuildContext context) {
+  void _addNewExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
+  void openAddExpenseOverlay(context) {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(handler: _addNewExpense),
     );
   }
 
