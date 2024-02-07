@@ -5,10 +5,10 @@ import 'package:expense_tracker/models/expense.dart';
 class NewExpense extends StatefulWidget {
   const NewExpense({
     super.key,
-    required this.handler,
+    required this.onAddExpense,
   });
 
-  final void Function(Expense) handler;
+  final void Function(Expense) onAddExpense;
 
   @override
   State<NewExpense> createState() => _NewExpenseState();
@@ -80,7 +80,7 @@ class _NewExpenseState extends State<NewExpense> {
       date: _selectedDate!,
     );
 
-    widget.handler(newExpense);
+    widget.onAddExpense(newExpense);
 
     Navigator.pop(context);
 

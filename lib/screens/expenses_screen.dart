@@ -1,6 +1,6 @@
-import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
+import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/expenses.dart';
 
@@ -36,7 +36,9 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   void openAddExpenseOverlay(context) {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => NewExpense(handler: _addNewExpense),
+      isScrollControlled: true,
+      useSafeArea: true,
+      builder: (ctx) => NewExpense(onAddExpense: _addNewExpense),
     );
   }
 
