@@ -33,6 +33,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     });
   }
 
+  void _removeExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+  }
+
   void openAddExpenseOverlay(context) {
     showModalBottomSheet(
       context: context,
@@ -60,6 +66,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       ),
       body: Expenses(
         expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
       ),
     );
   }

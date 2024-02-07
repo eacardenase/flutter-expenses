@@ -7,9 +7,12 @@ class Expenses extends StatefulWidget {
   const Expenses({
     super.key,
     required this.expenses,
+    required this.onRemoveExpense,
   });
 
   final List<Expense> expenses;
+
+  final void Function(Expense) onRemoveExpense;
 
   @override
   State<Expenses> createState() => _ExpensesState();
@@ -22,7 +25,10 @@ class _ExpensesState extends State<Expenses> {
       children: [
         const Text("Chart"),
         Expanded(
-          child: ExpensesList(expenses: widget.expenses),
+          child: ExpensesList(
+            expenses: widget.expenses,
+            onRemoveExpense: widget.onRemoveExpense,
+          ),
         ),
       ],
     );
