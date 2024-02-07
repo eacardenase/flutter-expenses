@@ -11,7 +11,8 @@ class ExpensesList extends StatelessWidget {
   });
 
   final List<Expense> expenses;
-  final void Function(Expense) onRemoveExpense;
+  final void Function({required Expense expense, required int index})
+      onRemoveExpense;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,10 @@ class ExpensesList extends StatelessWidget {
           ),
           confirmDismiss: (direction) async {
             if (direction == DismissDirection.endToStart) {
-              onRemoveExpense(expense);
+              onRemoveExpense(
+                expense: expense,
+                index: index,
+              );
 
               return true;
             }

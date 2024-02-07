@@ -12,7 +12,8 @@ class Expenses extends StatefulWidget {
 
   final List<Expense> expenses;
 
-  final void Function(Expense) onRemoveExpense;
+  final void Function({required Expense expense, required int index})
+      onRemoveExpense;
 
   @override
   State<Expenses> createState() => _ExpensesState();

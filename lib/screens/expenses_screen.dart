@@ -33,10 +33,27 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     });
   }
 
-  void _removeExpense(Expense expense) {
+  void _removeExpense({required Expense expense, required int index}) {
     setState(() {
       _registeredExpenses.remove(expense);
     });
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(index, expense);
+            });
+          },
+        ),
+        duration: const Duration(seconds: 3),
+        content: const Text('Expense deleted!'),
+      ),
+    );
   }
 
   void openAddExpenseOverlay(context) {
