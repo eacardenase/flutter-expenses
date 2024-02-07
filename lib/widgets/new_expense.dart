@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
-
-final dateFormatter = DateFormat.yMd();
+import 'package:expense_tracker/models/expense.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -15,6 +13,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
+  Category _selectedCategory = Category.leisure;
 
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -28,6 +27,18 @@ class _NewExpenseState extends State<NewExpense> {
 
     setState(() {
       _selectedDate = pickedDate;
+    });
+  }
+
+  void _handleDropdownButton(Category? category) {
+    if (category == null) {
+      return;
+    }
+
+    print(category);
+
+    setState(() {
+      _selectedCategory = category;
     });
   }
 
@@ -89,23 +100,41 @@ class _NewExpenseState extends State<NewExpense> {
               )
             ],
           ),
+          const SizedBox(height: 25),
           Row(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Cancel'),
+              DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(category.name.toUpperCase()),
+                      ),
+                    )
+                    .toList(),
+                onChanged: _handleDropdownButton,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-
-                  _titleController.clear();
-                  _amountController.clear();
-                },
-                child: const Text('Save'),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        _titleController.clear();
+                        _amountController.clear();
+                      },
+                      child: const Text('Save'),
+                    ),
+                  ],
+                ),
               ),
             ],
           )
