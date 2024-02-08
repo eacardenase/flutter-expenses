@@ -28,7 +28,7 @@ class ExpensesList extends StatelessWidget {
           key: ValueKey(expense),
           direction: DismissDirection.endToStart,
           background: Card(
-            color: Colors.red,
+            color: Theme.of(context).colorScheme.error.withOpacity(0.75),
             child: Container(
               padding: const EdgeInsets.only(right: 16),
               alignment: Alignment.centerRight,

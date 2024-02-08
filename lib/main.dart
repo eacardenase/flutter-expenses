@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:expense_tracker/screens/expenses_screen.dart';
 
-var colorScheme = ColorScheme.fromSeed(seedColor: Colors.cyan);
+var colorScheme = ColorScheme.fromSeed(seedColor: Colors.green);
 
 void main() {
   runApp(
@@ -27,9 +27,11 @@ void main() {
           ),
         ),
         textTheme: ThemeData().textTheme.copyWith(
-              titleLarge: const TextStyle(
+              titleLarge: TextStyle(
+                fontWeight: FontWeight.bold,
                 fontStyle: FontStyle.italic,
-                // fontSize: 24,
+                color: colorScheme.onSecondaryContainer,
+                fontSize: 16,
               ),
             ),
       ),
