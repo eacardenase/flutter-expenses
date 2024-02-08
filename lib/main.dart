@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:expense_tracker/screens/expenses_screen.dart';
 
-var colorScheme = ColorScheme.fromSeed(seedColor: Colors.greenAccent);
+var colorScheme =
+    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 96, 59, 181));
 var darkColorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
-  seedColor: Colors.cyan,
+  seedColor: const Color.fromARGB(255, 5, 99, 125),
 );
 
 void main() {

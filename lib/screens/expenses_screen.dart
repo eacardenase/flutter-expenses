@@ -14,13 +14,13 @@ class ExpensesScreen extends StatefulWidget {
 class _ExpensesScreenState extends State<ExpensesScreen> {
   final List<Expense> _registeredExpenses = [
     Expense(
-      title: "NU",
+      title: 'NU',
       amount: 1475900,
       category: Category.work,
       date: DateTime.now(),
     ),
     Expense(
-      title: "Udemy Courses",
+      title: 'Udemy Courses',
       amount: 59800,
       category: Category.work,
       date: DateTime.now(),
@@ -70,7 +70,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Expense Tracker",
+          'Expense Tracker',
         ),
         actions: [
           IconButton(
