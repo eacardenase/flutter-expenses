@@ -155,7 +155,12 @@ class _NewExpenseState extends State<NewExpense> {
                     .map(
                       (category) => DropdownMenuItem(
                         value: category,
-                        child: Text(category.name.toUpperCase()),
+                        child: Text(
+                          category.name.toUpperCase(),
+                          style: const TextStyle().copyWith(
+                            color: ThemeData().colorScheme.primary,
+                          ),
+                        ),
                       ),
                     )
                     .toList(),
