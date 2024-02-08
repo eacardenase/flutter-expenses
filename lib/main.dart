@@ -10,74 +10,74 @@ var darkColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 5, 99, 125),
 );
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SystemChrome.setPreferredOrientations(
+  await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
     ],
-  ).then((value) {
-    runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData().copyWith(
-          colorScheme: colorScheme,
-          appBarTheme: const AppBarTheme().copyWith(
-            backgroundColor: colorScheme.primaryContainer,
-            foregroundColor: colorScheme.onPrimaryContainer,
-          ),
-          cardTheme: const CardTheme().copyWith(
-            color: colorScheme.secondaryContainer,
-            margin: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.primaryContainer,
-            ),
-          ),
-          textTheme: ThemeData().textTheme.copyWith(
-                titleLarge: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  color: colorScheme.onSecondaryContainer,
-                  fontSize: 16,
-                ),
-              ),
+  );
+
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData().copyWith(
+        colorScheme: colorScheme,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: colorScheme.primaryContainer,
+          foregroundColor: colorScheme.onPrimaryContainer,
         ),
-        darkTheme: ThemeData.dark().copyWith(
-          colorScheme: darkColorScheme,
-          appBarTheme: const AppBarTheme().copyWith(
+        cardTheme: const CardTheme().copyWith(
+          color: colorScheme.secondaryContainer,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: colorScheme.primaryContainer,
+          ),
+        ),
+        textTheme: ThemeData().textTheme.copyWith(
+              titleLarge: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                color: colorScheme.onSecondaryContainer,
+                fontSize: 16,
+              ),
+            ),
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: darkColorScheme,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: darkColorScheme.primaryContainer,
+          foregroundColor: darkColorScheme.onPrimaryContainer,
+        ),
+        cardTheme: const CardTheme().copyWith(
+          color: darkColorScheme.secondaryContainer,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
             backgroundColor: darkColorScheme.primaryContainer,
             foregroundColor: darkColorScheme.onPrimaryContainer,
           ),
-          cardTheme: const CardTheme().copyWith(
-            color: darkColorScheme.secondaryContainer,
-            margin: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: darkColorScheme.primaryContainer,
-              foregroundColor: darkColorScheme.onPrimaryContainer,
-            ),
-          ),
-          textTheme: ThemeData().textTheme.copyWith(
-                titleLarge: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  color: darkColorScheme.onSecondaryContainer,
-                  fontSize: 16,
-                ),
-              ),
         ),
-        home: const ExpensesScreen(),
+        textTheme: ThemeData().textTheme.copyWith(
+              titleLarge: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic,
+                color: darkColorScheme.onSecondaryContainer,
+                fontSize: 16,
+              ),
+            ),
       ),
-    );
-  });
+      home: const ExpensesScreen(),
+    ),
+  );
 }
