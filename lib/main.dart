@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:expense_tracker/screens/expenses_screen.dart';
 
@@ -10,15 +9,7 @@ var darkColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 5, 99, 125),
 );
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-    ],
-  );
-
+void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
