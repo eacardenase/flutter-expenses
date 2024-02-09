@@ -100,101 +100,204 @@ class _NewExpenseState extends State<NewExpense> {
   Widget build(BuildContext context) {
     final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
 
-    return SizedBox(
-      height: double.infinity,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 48, 16, keyboardSpace + 16),
-          child: Column(
-            children: [
-              TextField(
-                maxLength: 50,
-                // keyboardType: TextInputType.text, // enabled by default
-                controller: _titleController,
-                decoration: const InputDecoration(
-                  // hintText: "Title",
-                  label: Text(
-                    'Title',
-                  ),
-                ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // constraints tells which constraints are applied by the parent widget
+        final width = constraints.maxWidth;
+
+        return SizedBox(
+          height: double.infinity,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
+              child: Column(
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _amountController,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        label: Text('Amount'),
-                        prefixText: '\$ ',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                  if (width >= 600)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          _selectedDate == null
-                              ? 'No date selected'
-                              : dateFormatter.format(_selectedDate!),
-                        ),
-                        IconButton(
-                          onPressed: _presentDatePicker,
-                          icon: const Icon(Icons.calendar_month),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 25),
-              Row(
-                children: [
-                  DropdownButton(
-                    value: _selectedCategory,
-                    items: Category.values
-                        .map(
-                          (category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(
-                              category.name.toUpperCase(),
-                              style: const TextStyle().copyWith(
-                                color: ThemeData().colorScheme.primary,
+                        Expanded(
+                          child: TextField(
+                            maxLength: 50,
+                            // keyboardType: TextInputType.text, // enabled by default
+                            controller: _titleController,
+                            decoration: const InputDecoration(
+                              // hintText: "Title",
+                              label: Text(
+                                'Title',
                               ),
                             ),
                           ),
-                        )
-                        .toList(),
-                    onChanged: _handleDropdownButton,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('Cancel'),
                         ),
-                        const SizedBox(width: 16),
-                        ElevatedButton(
-                          onPressed: _submitExpenseData,
-                          child: const Text('Save'),
+                        const SizedBox(width: 24),
+                        Expanded(
+                          child: TextField(
+                            controller: _amountController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              label: Text('Amount'),
+                              prefixText: '\$ ',
+                            ),
+                          ),
                         ),
                       ],
+                    )
+                  else
+                    TextField(
+                      maxLength: 50,
+                      // keyboardType: TextInputType.text, // enabled by default
+                      controller: _titleController,
+                      decoration: const InputDecoration(
+                        // hintText: "Title",
+                        label: Text(
+                          'Title',
+                        ),
+                      ),
                     ),
-                  ),
+                  if (width >= 600)
+                    Row(
+                      children: [
+                        DropdownButton(
+                          value: _selectedCategory,
+                          items: Category.values
+                              .map(
+                                (category) => DropdownMenuItem(
+                                  value: category,
+                                  child: Text(
+                                    category.name.toUpperCase(),
+                                    style: const TextStyle().copyWith(
+                                      color: ThemeData().colorScheme.primary,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: _handleDropdownButton,
+                        ),
+                        const SizedBox(width: 24),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                _selectedDate == null
+                                    ? 'No date selected'
+                                    : dateFormatter.format(_selectedDate!),
+                              ),
+                              IconButton(
+                                onPressed: _presentDatePicker,
+                                icon: const Icon(Icons.calendar_month),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    )
+                  else
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: _amountController,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              label: Text('Amount'),
+                              prefixText: '\$ ',
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                _selectedDate == null
+                                    ? 'No date selected'
+                                    : dateFormatter.format(_selectedDate!),
+                              ),
+                              IconButton(
+                                onPressed: _presentDatePicker,
+                                icon: const Icon(Icons.calendar_month),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  const SizedBox(height: 25),
+                  if (width >= 600)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              const SizedBox(width: 16),
+                              ElevatedButton(
+                                onPressed: _submitExpenseData,
+                                child: const Text('Save'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    Row(
+                      children: [
+                        DropdownButton(
+                          value: _selectedCategory,
+                          items: Category.values
+                              .map(
+                                (category) => DropdownMenuItem(
+                                  value: category,
+                                  child: Text(
+                                    category.name.toUpperCase(),
+                                    style: const TextStyle().copyWith(
+                                      color: ThemeData().colorScheme.primary,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: _handleDropdownButton,
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              const SizedBox(width: 16),
+                              ElevatedButton(
+                                onPressed: _submitExpenseData,
+                                child: const Text('Save'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
